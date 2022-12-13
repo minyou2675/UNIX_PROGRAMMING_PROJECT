@@ -29,6 +29,7 @@ if (argc != 2){ //인자를 받지 않았을 경우 에러 처리
 		  exit(1);
 		  break;
 	case 0 : //자식 프로세스
+	printf("\n");
 	sleep(5);
 	printf("%s\n", addr);
 	break;
