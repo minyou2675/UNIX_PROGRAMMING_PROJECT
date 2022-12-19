@@ -38,6 +38,7 @@ int main(int argc, char* argv[]){
         perror("accept");
         exit(1);
     }
+    while(1){
     if(recv(ns,buf,sizeof(buf),0) == -1){
         perror("recv");
         exit(1);
@@ -51,6 +52,7 @@ int main(int argc, char* argv[]){
     if(send(ns, str, strlen(str)+ 1, 0) == -1){
         perror("send");
         exit(1);
+    }
     }
 
     close(ns);
