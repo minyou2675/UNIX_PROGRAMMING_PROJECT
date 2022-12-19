@@ -33,12 +33,12 @@ int main(){
     
     default:
         close(fd[1]);
-        waitpid(NULL);
+        wait(NULL);
         if(fd[0] != 0){
             dup2(fd[0], 0);
             close(fd[0]);
         }
-        execlp("grep","grep","c".(char *)NULL);
+        execlp("grep","grep","c",(char *)NULL);
         exit(1);
         break;
     }
