@@ -45,7 +45,7 @@ int main(int argc, char* argv[]){
     }
     int j = 0;
     printf("server received : %s\n", buf);
-    for(int i = strlen(buf)-1; i > 0; i--){
+    for(int i = strlen(buf)-1; i >= 0; i--){
     	str[j]  = buf[i];
 	j++;
     }

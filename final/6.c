@@ -23,7 +23,7 @@ int main(){
 
     pthread_mutex_init(&mutex, NULL); //뮤텍스 초기화
 
-    pthread_t t[2];
+    pthread_t t[2]
     int  r;
     r = pthread_create(&t[0], NULL, c, NULL); //thread 생성
     if( r != 0 ){
