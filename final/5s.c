@@ -34,6 +34,7 @@ int main(int argc, char* argv[]){
         perror("listen");
         exit(1);
     }
+    while(1){
     if((ns = accept(sd, (struct sockaddr *)&cli, &clientlen)) == -1){
         perror("accept");
         exit(1);
@@ -44,17 +45,16 @@ int main(int argc, char* argv[]){
         exit(1);
     }
     int j = 0;
-    printf("server received : %s\n", buf);
     for(int i = strlen(buf)-1; i >= 0; i--){
     	str[j]  = buf[i];
 	j++;
     }
 
-    printf("str = %s\n",str);
 
     if(send(ns, str, strlen(str)+ 1, 0) == -1){
         perror("send");
         exit(1);
+    }
     }
     
 
