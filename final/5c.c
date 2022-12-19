@@ -22,9 +22,9 @@ int main(){
     memset((char *)&sin, '\0', sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_port = htons(PORTNUM);
-    sin.sin _addr.s_addr = inet_addr("127.0.0.1");
+    sin.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-    if(connect(sd, (struct sockaddr *)&sin, sizeof(sin))){
+    if(connect(sd, (struct sockaddr *)&sin, sizeof(sin)) == -1){
         perror("connect");
         exit(1);
     }

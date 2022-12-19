@@ -1,5 +1,5 @@
-#include <sys/types.h>
-#include <sys/mman.h>
+#include <sys/shm.h>
+#include <sys/ipc.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <fcntl.h>
@@ -10,39 +10,37 @@
 
 int main(){
 
-    int fd;
-    pid_t pid;
-    caddr_t addr;
-    struct stat statbuf;
-    char buf[256];
+   int shmid, i;
+   char *addr1, *addr2;
+   pid_t pid;
 
-    addr = mmap(NULL, statbuf.st_size, PROT_READ|PROT_WRITE, MAP_SHARED, fd, (off_t)0);
-    if(addr == MAP_FAILED){
-        perror("mmap");
-        exit(1);
-    }
-    close(fd);
+   shmid = shmget(IPC_PRIVATE, 20, IPC_CREAT|0644);
+   if(shmid == -1){
+   	perror("shmid");
+	exit(1);
+   }
+    char buf[256];
 
     switch (pid = fork())
     {
-    case : -1
+    case -1 :
         perror("fork");
         exit(1);    
-    case : 0 //child process
-        int child = (int)getpid();
-        int parent = (int)getppid();
-        printf("=Child %d begins\n",child);
-        printf("=Child %d ends\n",child);
-        sprintf(buf,"%d gets Message from %d",parent,child);
-        strcpy(addr,buf);
+    case 0 :  //child process
+    	addr1 = (char *)shmat(shmid, (char *)NULL, 0);
+        printf("=Child %d begins\n",(int)getpid());
+        printf("=Child %d ends\n",(int)getpid());
+        sprintf(buf,"%d gets Message from %d",(int)getppid(),(int)getpid());
+        strcpy(addr1,buf);
         
         break;
     
     default:
         wait(NULL);
+	addr2 = (char *)shmat(shmid, (char *)NULL, 0);
         printf("=Parent %d begins\n",(int)getpid());
-        printf("%s\n",addr);
-        printf("=Parent %d ends", (int)getpid());
+        printf("%s\n",addr2);
+        printf("=Parent %d ends\n", (int)getpid());
         exit(1);
         break;
     }

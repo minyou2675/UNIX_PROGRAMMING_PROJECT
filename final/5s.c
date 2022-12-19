@@ -8,7 +8,7 @@
 
 #define PORTNUM 8000
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv){
     char buf[256];
     int str_len = strlen(argv);
     char str[str_len+1];

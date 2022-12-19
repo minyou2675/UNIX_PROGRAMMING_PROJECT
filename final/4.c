@@ -26,26 +26,26 @@ printf("Queue Order:\n");
 for(int i = 1; i < argc; i++){
     printf("%s ",argv[i]);
 }
-puts("");
+puts("\n");
 
 printf("Stack Order:\n");
-for(int i = argc; i >1; i--){
+for(int i = argc-1; i >0; i--){
     printf("%s ",argv[i]);
 }
-puts("");
+puts("\n");
 
-printf("Alphabetical Order:");
+printf("Alphabetical Order:\n");
 qsort(&argv[1], argc-1, sizeof(char *),compare_strings);
 for(int i = 1; i < argc; i++){
     printf("%s ", argv[i]);
 }
-puts("");
-printf("Reverse Alphabetical Order:");
+puts("\n");
+printf("Reverse Alphabetical Order:\n");
 qsort(&argv[1], argc-1, sizeof(char *),r_compare_strings);
 for(int i = 1 ; i < argc; i++){
     printf("%s ", argv[i]); 
 }
-puts("");
+puts("\n");
 
 
 }

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <ptrhead.h>
+#include <pthread.h>
 #include <stdlib.h>
 
 #define N 100000000
