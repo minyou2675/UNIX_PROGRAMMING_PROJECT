@@ -8,12 +8,13 @@
 
 #define PORTNUM 8000
 
-int main(int argc char* argv){
+int main(int argc char* argv[]){
 
     int sd;
     char buf[256];
     struct sockaddr_in sin;
 
+   strcpy(buf,argv[1]);
     if((sd = socket(AF_INET, SOCK_STREAM, 0)) == -1){ //소켓 생성하고 실패 시 에러처리
         perror("socket");
         exit(1);
@@ -28,6 +29,11 @@ int main(int argc char* argv){
         perror("connect");
         exit(1);
     }
+    if(send(sd,buf,strlen(buf)+1, 0) == -1){
+        perror("send");
+        exit(1);
+    }
+
     if(recv(sd, buf, sizeof(buf), 0) == -1){
         perror("recv");
         exit(1);

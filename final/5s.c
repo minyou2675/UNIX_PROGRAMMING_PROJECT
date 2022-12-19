@@ -8,16 +8,10 @@
 
 #define PORTNUM 8000
 
-int main(int argc, char* argv){
+int main(int argc, char* argv[]){
     char buf[256];
-    int str_len = strlen(argv);
-    char str[str_len+1];
-    for(int i = 0; i < strlen(argv); i--){
-        
-        str[i] = argv[str_len];
-        str_len --;
-
-    }
+    char* str;
+   
     struct sockaddr_in sin, cli;
     int sd, ns, clientlen = sizeof(cli);
 
@@ -44,10 +38,17 @@ int main(int argc, char* argv){
         perror("accept");
         exit(1);
     }
+    if(recv(ns,buf,sizeof(buf),0) == -1){
+        perror("recv");
+        exit(1);
+    }
+    int j = 0;
+    for(int i = strlen(buf); i > 0; i++){
+        str[j] = buf[i];
+        
+    }
 
-    sprintf(buf, str);
-
-    if(send(ns, buf, strlen(buf)+ 1, 0) == -1){
+    if(send(ns, str, strlen(str)+ 1, 0) == -1){
         perror("send");
         exit(1);
     }
