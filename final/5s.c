@@ -10,7 +10,7 @@
 
 int main(int argc, char* argv[]){
     char buf[256];
-    char* str;
+    char str[256];
    
     struct sockaddr_in sin, cli;
     int sd, ns, clientlen = sizeof(cli);
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]){
         perror("bind");
         exit(1);
     }
-    while(1){
+    
     if(listen(sd, 5)){
         perror("listen");
         exit(1);
@@ -44,19 +44,20 @@ int main(int argc, char* argv[]){
         exit(1);
     }
     int j = 0;
-    for(int i = strlen(buf); i > 0; i++){
-        str[j] = buf[i];
-        
+    printf("server received : %s\n", buf);
+    for(int i = strlen(buf)-1; i > 0; i--){
+    	str[j]  = buf[i];
+	j++;
     }
+
+    printf("str = %s\n",str);
 
     if(send(ns, str, strlen(str)+ 1, 0) == -1){
         perror("send");
         exit(1);
     }
-    }
+    
 
-    close(ns);
-    close(sd);
 
 
 
