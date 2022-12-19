@@ -29,7 +29,7 @@ int main(int argc, char* argv[]){
         perror("bind");
         exit(1);
     }
-
+    while(1){
     if(listen(sd, 5)){
         perror("listen");
         exit(1);
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]){
         perror("accept");
         exit(1);
     }
-    while(1){
+   
     if(recv(ns,buf,sizeof(buf),0) == -1){
         perror("recv");
         exit(1);
