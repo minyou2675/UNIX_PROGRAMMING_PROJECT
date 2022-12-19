@@ -15,7 +15,10 @@ int main(int argc, char* argv[]){
     char received[256]; //서버로부터 받는 메세지를 저장할 공간
     struct sockaddr_in sin; // 소켓 구조체를 선언하여 소켓의 종류, ip 주소, 포트 번호를 지정할 수 있도록 함.
 
-   strcpy(buf,argv[1]); // 인자로 받은 문자를 buf에 저장
+   for(int i = 1; i < argc; i++){
+   	strcat(buf,argv[i]);
+	strcat(buf," ");
+   } // 인자로 받은 문자를 buf에 저장
 
     if((sd = socket(AF_INET, SOCK_STREAM, 0)) == -1){ //소켓 생성하고 실패 시 에러처리
         perror("socket");
