@@ -7,7 +7,7 @@ int cnt = 0;
 
 void sig_handler(int signo){
    cnt ++;
-   fprintf(stderr,"CHanlder is called %d time(s)",cnt);
+   fprintf(stderr,"CHanlder is called %d time(s)\n",cnt);
 
 }
 
@@ -23,7 +23,7 @@ int main(){
    }
 
     while(1){
-        printf("I'm in infinite loop");
+        printf("I'm in infinite loop\n");
         pause();
     }
 }
