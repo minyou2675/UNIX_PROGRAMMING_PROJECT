@@ -5,7 +5,7 @@
 
 int main(){
 
-    int fd[2];
+    int fd[2]; 
     pid_t pid;
     char buf[255];
     int len, status;
@@ -22,9 +22,9 @@ int main(){
         perror("fork");
         exit(1);
     case 0 :
-        close(fd[0]);
-        if(fd[1] != 0){
-            dup2(fd[1], 1);
+        close(fd[0]); // 쓰기 전용으로 선언
+        if(fd[1] != 0){ 
+            dup2(fd[1], 1); //
             close(fd[1]);
         }
         execlp("ls", "ls", "-l",(char *)NULL);

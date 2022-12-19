@@ -19,7 +19,7 @@ void *c(void *d)
 
 }
 
-int main(void){
+int main(){
 
     pthread_mutex_init(&mutex, NULL); //뮤텍스 초기화
 
