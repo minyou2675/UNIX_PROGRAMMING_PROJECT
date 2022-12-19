@@ -6,8 +6,8 @@
 int cnt = 0;
 
 void sig_handler(int signo){
-
-    psignal(signo,"CHandler is called  %d time(s)",cnt);
+   cnt ++;
+   fprintf(stderr,"CHanlder is called %d time(s)",cnt);
 
 }
 
@@ -16,7 +16,7 @@ int main(){
     struct sigaction act;
     sigemptyset(&act.sa_mask);
     sigaddset(&act.sa_mask, SIGQUIT);
-    act.sa_handler = sig_hanlder;
+    act.sa_handler = sig_handler;
     if(sigaction(SIGINT, &act, (struct sigaction *)NULL) < 0){
         perror("sigaction");
         exit(1);
@@ -24,6 +24,6 @@ int main(){
 
     while(1){
         printf("I'm in infinite loop");
-        pause()
+        pause();
     }
 }
